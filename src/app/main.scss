@@ -1,0 +1,44 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.bro-field {
+  &--wrapper {
+    background-color: pink;
+  }
+  &--steps {
+    display: flex;
+    flex-direction: column-reverse;
+
+    &-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      grid-template-rows: 1fr;
+      align-items: center;
+
+      .sn {
+        grid-column: 1 / 3;
+        grid-row: 1 / 1;
+        z-index: 2;
+        color: lime;
+      }
+
+      img {
+        grid-column: 1 / 3;
+        grid-row: 1 / 1;
+        height: 100%;
+      }
+
+      .bsi--arrow {
+        left: 60px;
+      }
+    }
+  }
+}
+
+// arrows
