@@ -1,0 +1,78 @@
+.fretboard {
+ background-color: pink; 
+ border-left: 4px double black;
+
+ display: flex;
+ flex-direction: row;
+  gap: 1px;
+}
+.fret {
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+
+  &:first-child {
+    width: 30px;
+    .too-string-wrapper {
+      width: 100%;
+    }
+  }
+
+  .info {
+    text-align: center;
+  }
+}
+
+$markup-color: red;
+$active-ball-dim: 16px;
+
+.too-string-wrapper {
+  position: relative;
+  line-height: initial;
+  background-color: rebeccapurple;
+
+  width: 60px;
+  height: 30px;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    // transform: translateY(50%);
+
+    width: 100%;
+    height: 2px;
+    background-color: $markup-color;
+    content: '';
+    pointer-events: none;
+  }
+
+  button {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  &.active {
+    &::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      width: $active-ball-dim;
+      height: $active-ball-dim;
+
+      background-color: $markup-color;
+      border-radius: 50%;
+
+      content: '';
+      pointer-events: none;
+    }
+
+    button {
+      // background-color: royalblue;
+    }
+  }
+}
