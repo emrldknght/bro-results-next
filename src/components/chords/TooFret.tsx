@@ -14,7 +14,7 @@ export function TooFret({ fret }: TooFretProps) {
 			{STRINGS.map((string) => (
 				<TooString
 					key={string}
-					string={string}
+					stringNum={string}
 					fret={fret}
 				/>
 			))}

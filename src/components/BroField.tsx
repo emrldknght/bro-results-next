@@ -32,20 +32,20 @@ export default function BroField() {
     };
     
     const fetchData = async () => {
-      await fetchTeams()
+      await fetchTeams();
 
-      await fetchResults()
-    }
+      await fetchResults();
+    };
 
     fetchData()
-      .catch(console.error)
+      .catch(console.error);
 
   }, []);
 
   const resultsOnLine = (pos: number) => {
-    const rf = []
+    const rf = [];
 
-    const r = resultsData?.results || {}
+    const r = resultsData?.results || {};
 
     for(const id of Object.keys(r)) {
     // Object.keys(r).forEach(id => {
@@ -56,12 +56,12 @@ export default function BroField() {
     }
 
     return rf;
-  }
+  };
 
   const jetOnLine = (pos: number) => {
     return (resultsData?.jets || [])
-      .filter(jet => jet.position === pos)
-  }
+      .filter(jet => jet.position === pos);
+  };
 
 
   return (
@@ -93,5 +93,5 @@ export default function BroField() {
         }
       </div>
     </div>
-  )
+  );
 }

@@ -16,4 +16,4 @@ export const romanize = (num: number) => {
   }
 
   return new Array(+digits.join("") + 1).join("M") + roman;
-}
+};

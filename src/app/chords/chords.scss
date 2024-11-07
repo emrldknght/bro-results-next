@@ -75,4 +75,27 @@ $active-ball-dim: 16px;
       // background-color: royalblue;
     }
   }
+  &.is-x {
+    &::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      width: $active-ball-dim;
+      height: $active-ball-dim;
+
+      // background-color: $markup-color;
+      // border-radius: 50%;
+
+      content: '\2716';
+      text-align: center;
+      color: $markup-color;
+
+      pointer-events: none;
+
+    }
+
+  }
 }

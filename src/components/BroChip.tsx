@@ -17,7 +17,7 @@ export function BroChip({chip}: BroChipProps) {
     }
 
     return (avatar) ? `url(avatars/${avatar})` : '';
-  }
+  };
 
   return (
     <div
@@ -29,5 +29,5 @@ export function BroChip({chip}: BroChipProps) {
     >
       {chip}
     </div>
-  )
+  );
 }

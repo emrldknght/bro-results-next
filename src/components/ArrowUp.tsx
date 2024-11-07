@@ -7,7 +7,7 @@ interface ArrowUpProps {
 function UpHead() {
   return (
     <polygon points="40 0, 70 15, 40 30" className="svg-arrow-head"/>
-  )
+  );
 }
 
 function DownHead({dah}) {
@@ -16,7 +16,7 @@ function DownHead({dah}) {
       points={`${40} ${0 + dah + 10}, 70 ${15 + dah + 10}, 40 ${30 + dah + 10}`}
       className="svg-arrow-head"
     />
-  )
+  );
 }
 
 export function ArrowUp({amount, height}: ArrowUpProps) {
@@ -42,10 +42,10 @@ export function ArrowUp({amount, height}: ArrowUpProps) {
     height: `${(height * (Math.abs(currentJet.amount))) + 20}px`
   };
   const vb = `0 0 70 ${height * (Math.abs(currentJet.amount)) + 20}`;
-  const h2 = height * (Math.abs(currentJet.amount)) - 25 + 1 // + 20 // - 20;
+  const h2 = height * (Math.abs(currentJet.amount)) - 25 + 1; // + 20 // - 20;
   const y3 = height * (Math.abs(currentJet.amount)); // + 5;
 
-  const dah = height * Math.abs(amount) - 10
+  const dah = height * Math.abs(amount) - 10;
 
   return (
     <div className="bsi--arrow">
@@ -71,5 +71,5 @@ export function ArrowUp({amount, height}: ArrowUpProps) {
         </svg>
       </div>
     </div>
-  )
+  );
 }

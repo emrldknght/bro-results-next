@@ -2,31 +2,44 @@ import type {ComponentProps} from "react";
 import {useChordContext} from "@/ChordContext";
 
 interface TooStringProps extends ComponentProps<'div'> {
-  string: number;
+  stringNum: number;
   fret: number;
 }
-export function TooString({ string, fret}: TooStringProps) {
-  const { chord, setChord } = useChordContext()
+export function TooString({ stringNum, fret}: TooStringProps) {
+  const { chord, setChord } = useChordContext();
 
-  const isActive = fret === chord[string]
+  const isActive = fret === chord[stringNum];
+  const isX = fret === 0 && chord[stringNum] === -1;
 
-  const handleClick = (string: number, fret: number) => {
-    const newChord = [...chord]
-    newChord[string] = fret
+  const handleClick = (stringNum: number, fret: number) => {
+    const newChord = [...chord];
+
+    const old = newChord[stringNum];
+    // console.log('fret', fret, 'old', old);
+
+    newChord[stringNum] = (fret === 0)
+        ? (old === 0)
+            ? -1
+            : 0
+        : fret;
+
+
     if (setChord) {
-      setChord(newChord)
+      setChord(newChord);
     }
-  }
+  };
 
   return (
-    <div className={`too-string-wrapper ${isActive ? 'active' : ''}`}>
+    <div className={
+      `too-string-wrapper ${isActive ? 'active' : ''} ${isX ? 'is-x' : '' }`
+    }>
       <button
         className={
           isActive ? 'active' : ''
         }
         type={'button'}
-        onClick={() => handleClick(string, fret)}
+        onClick={() => handleClick(stringNum, fret)}
       >&nbsp;</button>
     </div>
-  )
+  );
 }

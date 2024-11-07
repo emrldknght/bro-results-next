@@ -3,17 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8082",
     "build": "next build",
     "export": "next build && next export",
-    "start": "next start",
+    "start": "next start -p 8082",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "biome": "npx @biomejs/biome lint ."
   },
   "dependencies": {
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028"
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "tonal": "^6.3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

@@ -29,7 +29,7 @@ export function BroFieldStep({
 
     useEffect(() => {
         if (root) {
-            const _h = root.current?.offsetHeight
+            const _h = root.current?.offsetHeight;
             // console.log('h->', _h);
             if (_h) {
                 setHeight(_h);
@@ -38,11 +38,11 @@ export function BroFieldStep({
     }, [root]);
 
     const aucRef = React.createRef<HTMLDivElement>();
-    const [aucHeight, setAucHeight] = useState(50)
+    const [aucHeight, setAucHeight] = useState(50);
 
     useEffect(() => {
         const of = aucRef.current?.offsetHeight;
-        console.log(of)
+        console.log(of);
 
         if (of) {
             const padding = 1;
@@ -109,5 +109,5 @@ export function BroFieldStep({
           </div>
 
       </div>
-    )
+    );
 }
