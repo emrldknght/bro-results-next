@@ -1,5 +1,6 @@
 import type {ComponentProps} from "react";
 import {useChordContext} from "@/ChordContext";
+import {clsx} from "clsx";
 
 interface TooStringProps extends ComponentProps<'div'> {
   stringNum: number;
@@ -29,9 +30,15 @@ export function TooString({ stringNum, fret}: TooStringProps) {
     }
   };
 
+  const tClass = clsx({
+    'too-string-wrapper': true,
+    'active': isActive,
+    'is-x': isX
+  })
+
   return (
     <div className={
-      `too-string-wrapper ${isActive ? 'active' : ''} ${isX ? 'is-x' : '' }`
+      tClass
     }>
       <button
         className={
