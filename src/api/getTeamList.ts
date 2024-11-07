@@ -1,5 +1,5 @@
 import {URL_ROOT} from "@/api";
-import {TeamData} from "@/types";
+import type {TeamData} from "@/types";
 
 /** @return {} */
 export const getTeamsList = async (): Promise<TeamData[]> => {

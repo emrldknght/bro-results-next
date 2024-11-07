@@ -33,9 +33,7 @@ export function ArrowUp({amount, height}: ArrowUpProps) {
     : 36
    */
 
-  console.log('arrow h', height)
-
-
+  // console.log('arrow h', height)
 
   const klass = (currentJet.amount > 0)
     ? 'bsi--arrow--content-svg--up'
@@ -59,6 +57,7 @@ export function ArrowUp({amount, height}: ArrowUpProps) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox={vb}
         >
+          <title>jet arrow</title>
           {
             (amount > 0) && <UpHead />
           }

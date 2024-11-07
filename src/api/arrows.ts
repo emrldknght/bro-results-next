@@ -5,8 +5,8 @@ const createArrowDown = (root, amount) => {
 
   currentJet.amount = amount
 
-  const height = $(root).outerHeight()
-  console.log(height, typeof height)
+  const height = root.outerHeight()
+  // console.log(height, typeof height)
 
   const klass = (currentJet.amount > 0) ? 'bsi--arrow--content-svg--up': 'bsi--arrow--content-svg--down';
   const ztyle = `height: ${(height * (Math.abs(currentJet.amount))) + 25}px`;
@@ -28,7 +28,7 @@ const createArrowDown = (root, amount) => {
     : ''
 
 
-  console.log('y3', y3)
+  // console.log('y3', y3)
 
   const el = `
     <div class="bsi--arrow bsi--arrow-down">
@@ -49,7 +49,7 @@ const createArrowDown = (root, amount) => {
 
 
 
-  $(root).prepend(el);
+  root.prepend(el);
 }
 
 const createArrowUp = (root, amount) => {
@@ -59,9 +59,9 @@ const createArrowUp = (root, amount) => {
 
   currentJet.amount = amount
 
-  const height = $(root).outerHeight()
-  console.log('height', height)
-  console.log(height, typeof height)
+  const height = (root).outerHeight
+  // console.log('height', height)
+  // console.log(height, typeof height)
 
   const klass = (currentJet.amount > 0) ? 'bsi--arrow--content-svg--up': 'bsi--arrow--content-svg--down';
   const ztyle = `height: ${(height * (Math.abs(currentJet.amount))) + 20}px`;
@@ -83,7 +83,7 @@ const createArrowUp = (root, amount) => {
     : ''
 
 
-  console.log('y3', y3)
+  // console.log('y3', y3)
 
   const el = `
     <div class="bsi--arrow">
@@ -104,7 +104,7 @@ const createArrowUp = (root, amount) => {
 
 
 
-  $(root).prepend(el);
+  root.prepend(el);
 }
 
 export const createArrow = (root, amount) => {

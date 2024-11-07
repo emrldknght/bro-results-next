@@ -1,0 +1,51 @@
+.steps--item-chips {
+  display: flex;
+  flex-direction: row;
+
+  max-width: 800px;
+  flex-wrap: wrap;
+  z-index: 2;
+
+  /* background-color: yellow; */
+  position: absolute;
+  left: 120px;
+
+  padding-left: 100px;
+}
+.chip {
+  /*
+  --dim: 30px;
+  width: var(--dim);
+  height: var(--dim);
+   */
+
+  background-color: white;
+  border-radius: 50%;
+  /*border: 1px solid red;*/
+  font-size: 10px;
+  color: black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+
+  /*box-shadow: 15px 15px yellow;*/
+  box-shadow: 0 0 10px #fff, 0 0 20px #00ff2a;
+
+
+  position: relative;
+
+  background-size: 85%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  aspect-ratio: 1;
+
+}
+.chip .chip__tooltip {
+  position: initial;
+  transform: initial;
+  max-width: initial;
+  overflow: initial;
+}

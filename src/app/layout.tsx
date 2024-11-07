@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./main.scss";
 import "./arrows.scss";
+import "./css/chips.scss";
+import "./css/spec.scss";
+import type React from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

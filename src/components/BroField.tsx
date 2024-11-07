@@ -1,11 +1,11 @@
 "use client";
 // import Image from 'next/image';
 
-import React, {ComponentProps, useEffect, useRef, useState} from "react";
-import {getResults, JetData, ResultsApiAnswer} from "@/api/getResults";
-import {TeamData} from "@/types";
+import React, {useEffect, useState} from "react";
+import {getResults, type ResultsApiAnswer} from "@/api/getResults";
+import type {TeamData} from "@/types";
 import {getTeamsList} from "@/api/getTeamList";
-import {ArrowUp} from "@/components/ArrowUp";
+import {BroFieldStep} from "@/components/BroFieldStep";
 
 const STEPS = [
   0, 1, 2, 3, 4, 5, 6, 7, 8,
@@ -15,54 +15,6 @@ const STEPS = [
   30, 31, 32, 33, 34, 35, 36,
   37, 38, 39, 40, 41, 42,
 ];
-
-interface BroFieldStepProps extends ComponentProps<'div'>{
-  step: number;
-  results: string[];
-  jets?: JetData[];
-}
-
-export function BroFieldStep({ step, jets }: BroFieldStepProps) {
-  const jet = (jets || [])[0];
-
-  const root = React.createRef<HTMLDivElement>();
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (root) {
-      const _h = root.current?.offsetHeight
-      console.log('h->', _h);
-      if (_h) {
-        setHeight(_h);
-      }
-    }
-  }, [root]);
-
-
-  return (
-    <div
-      ref={root}
-      className={'bro-field--steps-item results-steps__item'}
-    >
-      {(height > 0 && jet && jet.amount !== 0) && (
-        <ArrowUp amount={jet.amount} height={height} />
-      )}
-      {/*<div className={'sn'}>{step}</div>*/}
-      {(step > 0)
-        ? (
-          <img
-            src={`field_parts/${step}.png`}
-            alt={'step'}
-
-          />)
-        : (
-          <span>&nbsp;</span>
-        )
-      }
-
-    </div>
-  )
-}
 
 export default function BroField() {
   const [teams, setTeams] = useState<TeamData[]>([]);
@@ -75,7 +27,7 @@ export default function BroField() {
     };
 
     const fetchResults = async () => {
-      const resultsData = await getResults(27);
+      const resultsData = await getResults(21);
       setResultsData(resultsData);
     };
     
@@ -95,12 +47,13 @@ export default function BroField() {
 
     const r = resultsData?.results || {}
 
-    Object.keys(r).forEach(id => {
-      const _id = r[id];
-      if (_id === pos) {
-        rf.push(_id);
+    for(const id of Object.keys(r)) {
+    // Object.keys(r).forEach(id => {
+      const _result = r[id];
+      if (_result === pos) {
+        rf.push(id);
       }
-    })
+    }
 
     return rf;
   }
@@ -122,7 +75,7 @@ export default function BroField() {
           ))
         }
       </div>
-      <div>{JSON.stringify(resultsData?.jets)}</div>
+      <div>{JSON.stringify(resultsData?.specials)}</div>
       <div className={'bro-field--steps'}>
         {
           STEPS.map(step =>
@@ -131,6 +84,10 @@ export default function BroField() {
               step={step}
               results={resultsOnLine(step)}
               jets={jetOnLine(step)}
+              hasKm={step === resultsData?.specials?.kmPosition}
+              hasAuction={step === resultsData?.specials?.auctionPosition}
+              hasHotPot={step === resultsData?.specials?.hotPotPosition}
+              hasFloppy={step === resultsData?.specials?.floppyPosition}
             />
           )
         }

@@ -7,7 +7,8 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "biome": "npx @biomejs/biome lint ."
   },
   "dependencies": {
     "next": "15.0.2",
@@ -15,6 +16,7 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
