@@ -19,7 +19,10 @@ export function TooFret({ fret }: TooFretProps) {
 				/>
 			))}
 			<div className={'info'}>
-				{ ((fret % 2) || fret === 12) ? romanize(fret) : '' }
+				{ ((fret % 2) || fret === 12)
+					?	<span>{romanize(fret)}</span>
+					: <span>&nbsp;</span>
+				}
 			</div>
 		</div>
 	);

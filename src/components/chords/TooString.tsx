@@ -20,9 +20,11 @@ export function TooString({ stringNum, fret}: TooStringProps) {
 
     newChord[stringNum] = (fret === 0)
         ? (old === 0)
-            ? -1
-            : 0
-        : fret;
+          ? -1
+          : 0
+        : (fret === old)
+          ? 0
+          : fret;
 
 
     if (setChord) {
@@ -34,7 +36,7 @@ export function TooString({ stringNum, fret}: TooStringProps) {
     'too-string-wrapper': true,
     'active': isActive,
     'is-x': isX
-  })
+  });
 
   return (
     <div className={

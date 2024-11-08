@@ -1,44 +1,65 @@
-.fretboard {
- background-color: pink; 
- border-left: 4px double black;
+@import "pianoroll";
 
- display: flex;
- flex-direction: row;
-  gap: 1px;
+$markup-color: black;
+$fret-width: 40px;
+$fret-height: 40px;
+$active-ball-dim: 12px;
+
+.fretboard {
+  background-color: pink;
+  border-left: 4px double $markup-color;
+
+  display: flex;
+  flex-direction: row;
+
+  font-size: 12px;
+  width: fit-content;
 }
 .fret {
-  background-color: yellow;
   display: flex;
   flex-direction: column;
 
   &:first-child {
-    width: 30px;
+    width: 25px;
     .too-string-wrapper {
       width: 100%;
     }
   }
 
+  border-top: 1px dotted $markup-color;
+
   .info {
     text-align: center;
+    border: 1px dotted $markup-color;
+    border-left: none;
+    border-right: none;
   }
+
+  border-right: 1px solid $markup-color;
+  box-sizing: border-box;
 }
 
-$markup-color: red;
-$active-ball-dim: 16px;
+
 
 .too-string-wrapper {
   position: relative;
   line-height: initial;
-  background-color: rebeccapurple;
+  // background-color: rebeccapurple;
 
-  width: 60px;
-  height: 30px;
+  &:nth-child(even) {
+    background-color: rgba(125, 125, 125, .2);
+  }
+
+
+  width: 40px;
+  // aspect-ratio: 2 / 1;
+  height: 20px;
 
   &::before {
     position: absolute;
     left: 0;
     top: 50%;
-    // transform: translateY(50%);
+    transform: translateY(-50%);
 
     width: 100%;
     height: 2px;
@@ -77,11 +98,13 @@ $active-ball-dim: 16px;
   }
   &.is-x {
     &::after {
+      // background-color: #00ff2a;
+
       position: absolute;
       left: 50%;
       top: 50%;
 
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -70%);
 
       width: $active-ball-dim;
       height: $active-ball-dim;

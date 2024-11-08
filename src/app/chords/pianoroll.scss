@@ -1,0 +1,24 @@
+.piano-roll {
+  background-color: plum;
+
+  display: flex;
+  flex-direction: row;
+
+  &--beat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--line {
+    width: 40px;
+    border-right: 1px dotted black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      height: 90%;
+      width: 90%;
+    }
+  }
+}
