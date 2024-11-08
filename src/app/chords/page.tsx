@@ -1,5 +1,5 @@
 import "./chords.scss";
-import {ChordProvider} from "@/ChordContext";
+import {ChordProvider} from "@/state/ChordContext";
 import {TooFretboard} from "@/components/chords/TooFretboard";
 import {TooPianoRoll} from "@/components/chords/TooPianoRoll";
 

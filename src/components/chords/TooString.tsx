@@ -1,5 +1,5 @@
 import type {ComponentProps} from "react";
-import {useChordContext} from "@/ChordContext";
+import {useChordContext} from "@/state/ChordContext";
 import {clsx} from "clsx";
 
 interface TooStringProps extends ComponentProps<'div'> {

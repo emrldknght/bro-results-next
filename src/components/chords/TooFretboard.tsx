@@ -2,7 +2,7 @@
 
 import {TooFret} from "@/components/chords/TooFret";
 
-import {useChordContext} from "@/ChordContext";
+import {useChordContext} from "@/state/ChordContext";
 import {FRETS} from "@/app/chords/page";
 import {Chord} from "tonal";
 
