@@ -1,21 +1,70 @@
 "use client";
 
-import {ChangeEvent, useEffect, useState} from "react";
-import {Roll} from "@/types/Roll";
-
-const DEFAULT_LINE = [-1, -1, -1, -1, -1, -1];
+import {useEffect, useState} from "react";
+import {useRollContext} from "@/state/RollContext";
+import {TooRollBeat} from "@/components/chords/TooRollBeat";
+import {TooChord} from "@/components/chords/TooChord";
+import {getCurrent} from "@/state/ChordContext";
 
 export function TooPianoRoll() {
 
-  const [roll, setRoll] = useState<Roll>([
-    { id: 0, content: [...DEFAULT_LINE] },
-    { id: 1, content: [...DEFAULT_LINE] },
-    { id: 2, content: [...DEFAULT_LINE] },
-  ]);
+  const { roll} = useRollContext();
+  const [currentX, setCurrentX] = useState(-1);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log('kd', e);
+      const k = e.code;
+      const t = e.target as HTMLElement;
+
+      const focusNext = (x: number, y: number) => {
+        // const next = document.querySelector(`input[tabindex="${newTabIndex}"]`);
+        const next = document.querySelector(`input[data-x="${x}"][data-y="${y}"]`);
+        console.log('next', next);
+        if (next) {
+          (next as HTMLInputElement).focus();
+        }
+      };
+
+      const tagName = (t as HTMLElement).tagName;
+
+      console.log('kd', e, t, tagName);
+      if (tagName === 'INPUT') {
+
+        const x = Number(t.dataset.x);
+        const y = Number(t.dataset.y);
+        console.log(`->(${x}, ${y})`, typeof x, typeof y);
+
+        switch (k) {
+          case 'KeyW':
+          // case 'ArrowUp':
+          {
+            e.preventDefault();
+            focusNext(x, y + 1);
+            break;
+          }
+          case 'KeyS':
+          // case 'ArrowDown':
+          {
+            e.preventDefault();
+            focusNext(x, y - 1);
+            break;
+          }
+          case 'KeyA':
+          // case 'ArrowLeft':
+          {
+            e.preventDefault();
+            focusNext(x - 1, y);
+            break;
+          }
+          case 'KeyD':
+          // case 'ArrowRight':
+          {
+            e.preventDefault();
+            focusNext(x + 1, y);
+            break;
+          }
+        }
+      }
     };
 
     document.addEventListener('keydown', handleKeyDown);
@@ -26,39 +75,57 @@ export function TooPianoRoll() {
 
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, line: number, beat: number) => {
-    const value = (e.target as HTMLInputElement).value;
+  useEffect(() => {
+    console.log('call focuses');
+    const handleFocus = (e: FocusEvent) => {
+      console.log('focusin', e);
+      const t = e.target as HTMLElement;
+      const tagName = (t as HTMLElement).tagName;
+      if (tagName === 'INPUT') {
+        const x = Number(t.dataset.x);
+        const y = Number(t.dataset.y);
+        console.log(`in->(${x}, ${y})`, typeof x, typeof y);
 
-    const newRoll = [...roll];
+        setCurrentX(x);
+      }
+    };
+    document.addEventListener('focusin', handleFocus);
 
-    console.log('beat', beat, 'line', line)
-    const newBeat = {...roll[beat]};
-    newBeat.content[line] = Number(value);
-    console.log('nb', newBeat);
+    return () => {
+      document.removeEventListener('focusin', handleFocus);
+    };
 
-    newRoll[beat] = newBeat;
+  }, []);
 
-    setRoll(newRoll);
+  useEffect(() => {
+    const handleFocusOut = () => {
+      setCurrentX(-1);
+    };
+    document.addEventListener('focusout', handleFocusOut);
 
-  }
+    return () => {
+      document.removeEventListener('focusout', handleFocusOut);
+    };
 
+  }, []);
+
+  const k = (currentX > -1)
+    ? getCurrent(roll[currentX].content)
+    : null;
 
   return (
-    <div >
+    <div>
       <div className={'raw'}>{JSON.stringify(roll)}</div>
+      <div className={'raw'}>currentX: {currentX}</div>
+      <div className={'raw'}>{JSON.stringify(k)}</div>
+      {k && <TooChord current={k} /> }
       <div className={'piano-roll'}>
         {roll.map((beat, j) =>
-          <div key={beat.id} className={'piano-roll--beat'}>
-            {beat.content.map((line, i) =>
-              <div key={`beat_${beat.id}_${i}`} className={'piano-roll--line'}>
-                <input
-                    type={'number'}
-                    value={roll[j].content[i]}
-                    onChange={(e) => handleChange(e, i, j)}
-                />
-              </div>
-            )}
-          </div>
+          <TooRollBeat
+            key={beat.id}
+            beat={beat}
+            beatNum={j}
+          />
         )}
       </div>
     </div>

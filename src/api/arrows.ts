@@ -22,7 +22,7 @@ const createArrowDown = (root, amount) => {
 
   const downHead = (amount < 0)
     ? `<polygon 
-        points="${40} ${0 + dah + 10}, 70 ${15 + dah + 10}, 40 ${30 + dah + 10}"
+        points="${40} ${dah + 10}, 70 ${15 + dah + 10}, 40 ${30 + dah + 10}"
         class="svg-arrow-head"
         />`
     : '';
@@ -77,7 +77,7 @@ const createArrowUp = (root, amount) => {
 
   const downHead = (amount < 0)
     ? `<polygon 
-        points="${40} ${0 + dah + 10}, 70 ${15 + dah + 10}, 40 ${30 + dah + 10}"
+        points="${40} ${dah + 10}, 70 ${15 + dah + 10}, 40 ${30 + dah + 10}"
         class="svg-arrow-head"
         />`
     : '';

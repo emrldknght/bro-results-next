@@ -45,3 +45,8 @@ yarn.lock
 __transfer/**
 public/field_parts/**
 public/avatars/**
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

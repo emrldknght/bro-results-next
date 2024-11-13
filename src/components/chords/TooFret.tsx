@@ -10,7 +10,7 @@ interface TooFretProps extends ComponentProps<'div'> {
 
 export function TooFret({ fret }: TooFretProps) {
 	return (
-		<div key={fret} className="fret">
+		<div key={fret} className="too-fret">
 			{STRINGS.map((string) => (
 				<TooString
 					key={string}

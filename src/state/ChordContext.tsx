@@ -25,7 +25,7 @@ const getNoteFromString = (string: string, pos: number) => {
     return tune[pos % tune.length];
 };
 
-const getCurrent = (chord: number[]) => {
+export const getCurrent = (chord: number[]) => {
     const _o = [
         getNoteFromString('E', chord[0]),
         getNoteFromString('A', chord[1]),
