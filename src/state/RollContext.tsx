@@ -2,6 +2,7 @@
 
 import type {Roll} from "@/types/Roll";
 import {createContext, type FC, useContext, useState} from "react";
+import type React from "react";
 
 interface IRollContext {
     roll: Roll;
@@ -25,7 +26,11 @@ const defaultState: IRollContext = {
 
 const RollContext = createContext<IRollContext>(defaultState);
 
-export const RollProvider: FC = ({children}) => {
+interface RollProviderProps {
+    children?: React.ReactNode;
+}
+
+export const RollProvider: FC = ({children}: RollProviderProps) => {
     const [roll, _setRoll] = useState<Roll>([...defaultState.roll]);
 
     const setRoll = (roll: Roll) => {
@@ -34,11 +39,11 @@ export const RollProvider: FC = ({children}) => {
 
     const setValue = (beat: number, line: number, value: number) => {
       const newRoll = [...roll];
-      console.log('beat', beat, 'line', line);
+      // console.log('beat', beat, 'line', line);
 
       const newBeat = {...roll[beat]};
       newBeat.content[line] = Number(value);
-      console.log('nb', newBeat);
+      // console.log('nb', newBeat);
 
       newRoll[beat] = newBeat;
       setRoll(newRoll);

@@ -6,9 +6,17 @@ import {TooRollBeat} from "@/components/chords/TooRollBeat";
 import {TooChord} from "@/components/chords/TooChord";
 import {getCurrent} from "@/state/ChordContext";
 
+const focusNext = (x: number, y: number) => {
+  const next = document.querySelector(`input[data-x="${x}"][data-y="${y}"]`);
+  if (next) {
+    (next as HTMLInputElement).focus();
+  }
+};
+
+
 export function TooPianoRoll() {
 
-  const { roll} = useRollContext();
+  const { roll, setValue } = useRollContext();
   const [currentX, setCurrentX] = useState(-1);
 
   useEffect(() => {
@@ -16,25 +24,24 @@ export function TooPianoRoll() {
       const k = e.code;
       const t = e.target as HTMLElement;
 
-      const focusNext = (x: number, y: number) => {
-        // const next = document.querySelector(`input[tabindex="${newTabIndex}"]`);
-        const next = document.querySelector(`input[data-x="${x}"][data-y="${y}"]`);
-        console.log('next', next);
-        if (next) {
-          (next as HTMLInputElement).focus();
-        }
-      };
 
       const tagName = (t as HTMLElement).tagName;
 
-      console.log('kd', e, t, tagName);
       if (tagName === 'INPUT') {
 
         const x = Number(t.dataset.x);
         const y = Number(t.dataset.y);
-        console.log(`->(${x}, ${y})`, typeof x, typeof y);
 
         switch (k) {
+          case 'Backspace': {
+              if (Number((t as HTMLInputElement).value) === 0) {
+
+                e.preventDefault();
+                setValue(x, y, -1);
+                break;
+              }
+              break;
+          }
           case 'KeyW':
           // case 'ArrowUp':
           {
@@ -73,19 +80,15 @@ export function TooPianoRoll() {
       document.removeEventListener('keydown', handleKeyDown);
     };
 
-  }, []);
+  }, [setValue]);
 
   useEffect(() => {
-    console.log('call focuses');
     const handleFocus = (e: FocusEvent) => {
-      console.log('focusin', e);
       const t = e.target as HTMLElement;
       const tagName = (t as HTMLElement).tagName;
       if (tagName === 'INPUT') {
         const x = Number(t.dataset.x);
-        const y = Number(t.dataset.y);
-        console.log(`in->(${x}, ${y})`, typeof x, typeof y);
-
+        // const y = Number(t.dataset.y);
         setCurrentX(x);
       }
     };
