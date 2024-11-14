@@ -9,7 +9,6 @@ export function TooRollLine({beatNum, lineNumber}: TooRollLineProps) {
   const { roll, setValue } = useRollContext();
   const handleChange = (e: ChangeEvent<HTMLInputElement>, line: number, beat: number) => {
     const value = (e.target as HTMLInputElement).value;
-    console.log('new v', e, v);
     setValue(beat, line, Number(value));
   };
 

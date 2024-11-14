@@ -1,13 +1,15 @@
 "use client";
 
+import useLocalStorage from "@/lib/useLocalStorage";
 import type {Roll} from "@/types/Roll";
-import {createContext, type FC, useContext, useState} from "react";
+import {createContext, type FC, useContext} from "react";
 import type React from "react";
 
 interface IRollContext {
     roll: Roll;
     setRoll: (roll: Roll) => void;
     setValue: (beat: number, line: number, value: number) => void;
+    addBeatLast: () => void;
 }
 
 const DEFAULT_LINE = [-1, -1, -1, -1, -1, -1];
@@ -22,6 +24,7 @@ const defaultState: IRollContext = {
     ],
     setRoll: () => {},
     setValue: () => {},
+    addBeatLast: () => {},
 };
 
 const RollContext = createContext<IRollContext>(defaultState);
@@ -31,7 +34,7 @@ interface RollProviderProps {
 }
 
 export const RollProvider: FC = ({children}: RollProviderProps) => {
-    const [roll, _setRoll] = useState<Roll>([...defaultState.roll]);
+    const [roll, _setRoll] = useLocalStorage<Roll>('too-roll', [...defaultState.roll]);
 
     const setRoll = (roll: Roll) => {
       _setRoll(roll);
@@ -50,12 +53,19 @@ export const RollProvider: FC = ({children}: RollProviderProps) => {
 
     };
 
+    const addBeatLast = () => {
+      const newRoll = [...roll];
+      newRoll.push({ id: newRoll.length, content: [...DEFAULT_LINE] });
+      setRoll(newRoll);
+    };
+
     return (
       <RollContext.Provider
         value={{
             roll,
             setRoll,
             setValue,
+            addBeatLast,
         }}
       >
           {children}

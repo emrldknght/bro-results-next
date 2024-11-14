@@ -6,17 +6,19 @@ import {TooRollBeat} from "@/components/chords/TooRollBeat";
 import {TooChord} from "@/components/chords/TooChord";
 import {getCurrent} from "@/state/ChordContext";
 
-const focusNext = (x: number, y: number) => {
+const focusNext = (x: number, y: number): boolean => {
   const next = document.querySelector(`input[data-x="${x}"][data-y="${y}"]`);
   if (next) {
     (next as HTMLInputElement).focus();
+    return true;
   }
+  return false;
 };
 
 
 export function TooPianoRoll() {
 
-  const { roll, setValue } = useRollContext();
+  const { roll, setValue, addBeatLast } = useRollContext();
   const [currentX, setCurrentX] = useState(-1);
 
   useEffect(() => {
@@ -67,7 +69,10 @@ export function TooPianoRoll() {
           // case 'ArrowRight':
           {
             e.preventDefault();
-            focusNext(x + 1, y);
+            const hasNext = focusNext(x + 1, y);
+            if (!hasNext) {
+              addBeatLast();
+            }
             break;
           }
         }
@@ -80,7 +85,7 @@ export function TooPianoRoll() {
       document.removeEventListener('keydown', handleKeyDown);
     };
 
-  }, [setValue]);
+  }, [setValue, addBeatLast]);
 
   useEffect(() => {
     const handleFocus = (e: FocusEvent) => {
